@@ -20,4 +20,10 @@ After first exploration:
     -idea: cluster states & weather for extra features?
     -try more combinations between linear combos between
      different vars of/in different states
-     
+    -add features on holidays (look for that old function)
+
+source /Users/markusdollmann/anaconda3/bin/activate
+conda activate EFORECAST
+
+file my_path.pth in folder site-packages under 
+/Users/markusdollmann/anaconda3/envs/MY_ENV_HEREW/lib/python3.7/site-packages
