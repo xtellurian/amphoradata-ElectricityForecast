@@ -6,6 +6,7 @@
 ._*
 *.gif
 *.fits
+*.svg
 *.csv
 .zip
 .ipynb_checkpoints
