@@ -1,0 +1,30 @@
+# Files
+.DS_Store
+*.png
+*.pdf
+*.idea/
+._*
+*.gif
+*.fits
+*.csv
+.zip
+.ipynb_checkpoints
+.csv
+.ckpt*
+.h5
+.pb
+.data
+
+
+# Folders
+__pycache__
+.vscode/
+*/.ipynb_checkpoints/
+*/__pycache__/
+0_setup/
+2_raw_data/
+3_processed_data/
+4_logs/
+5_models/
+z_other/
+dask-worker-space/

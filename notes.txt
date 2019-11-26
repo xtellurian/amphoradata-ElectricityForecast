@@ -1,0 +1,23 @@
+-df_weather.iloc[:,21] increases show decreases in E price
+-check corrs + diff corrs
+-wind_direction in degree 0=east? 360=east, 180=west,
+ 90=north
+-Lol, pressure has a high anti-correlation  with
+ temperature :D  how unexpected :D :D :D
+-pear['testfeature'] = temp_df.temperature * 
+temp_df.rain_prob * temp_df.wind_speed 
+* temp_df.wind_direction
+is in top5 features of 1k tree RF; highest 
+.feature_importance_ achieved
+
+After first exploration: 
+    -$generated, $d_price, $d_temperature largest feature
+    importance, with and small overlap to correlations
+    ($generated, $d_price, $d_pressure) to $price
+    -pairplot confirms corrs, most vars poisson distributed
+    -simple linear combinations yield features w/ only
+     slighly improved corr to $price
+    -idea: cluster states & weather for extra features?
+    -try more combinations between linear combos between
+     different vars of/in different states
+     
