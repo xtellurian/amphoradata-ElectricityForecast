@@ -27,3 +27,17 @@ conda activate EFORECAST
 
 file my_path.pth in folder site-packages under 
 /Users/markusdollmann/anaconda3/envs/MY_ENV_HEREW/lib/python3.7/site-packages
+
+After second day am-sesh:
+    -including data from all states extemely interesting. 
+    E.g. scheduledGeneration_QLD has highest corr to price_NSW - different states!!!
+    -excluding np.nan there are still ~200rows, 60 correlations
+
+    y.columns ['price_NSW', 'price_QLD', 'price_SA', 'price_VIC']
+
+EOD:
+    -RF power increases dramatically the closer to the end of dataset we get 
+    -RF efficacy hovers around ~10% rel acc, even predicting for other states
+    after training on NSW price movements
+    -linear model (9 highest corr to price_NSW) yields dramatically better
+    results in the single digits rel err
