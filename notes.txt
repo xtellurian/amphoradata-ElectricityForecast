@@ -1,43 +1,39 @@
--df_weather.iloc[:,21] increases show decreases in E price
--check corrs + diff corrs
--wind_direction in degree 0=east? 360=east, 180=west,
- 90=north
--Lol, pressure has a high anti-correlation  with
- temperature :D  how unexpected :D :D :D
--pear['testfeature'] = temp_df.temperature * 
-temp_df.rain_prob * temp_df.wind_speed 
-* temp_df.wind_direction
-is in top5 features of 1k tree RF; highest 
-.feature_importance_ achieved
-
-After first exploration: 
-    -$generated, $d_price, $d_temperature largest feature
-    importance, with and small overlap to correlations
-    ($generated, $d_price, $d_pressure) to $price
-    -pairplot confirms corrs, most vars poisson distributed
-    -simple linear combinations yield features w/ only
-     slighly improved corr to $price
-    -idea: cluster states & weather for extra features?
-    -try more combinations between linear combos between
-     different vars of/in different states
-    -add features on holidays (look for that old function)
-
 source /Users/markusdollmann/anaconda3/bin/activate
 conda activate EFORECAST
 
 file my_path.pth in folder site-packages under 
 /Users/markusdollmann/anaconda3/envs/MY_ENV_HEREW/lib/python3.7/site-packages
 
-After second day am-sesh:
-    -including data from all states extemely interesting. 
-    E.g. scheduledGeneration_QLD has highest corr to price_NSW - different states!!!
-    -excluding np.nan there are still ~200rows, 60 correlations
+y.columns ['price_NSW', 'price_QLD', 'price_SA', 'price_VIC']
 
-    y.columns ['price_NSW', 'price_QLD', 'price_SA', 'price_VIC']
+-next steps:
+    -do more EDA wrt the discoveries above, feature engineering, and
+    more detailed everything.
+    -do price/date encodings analysis!!!!!!!
 
-EOD:
-    -RF power increases dramatically the closer to the end of dataset we get 
-    -RF efficacy hovers around ~10% rel acc, even predicting for other states
-    after training on NSW price movements
-    -linear model (9 highest corr to price_NSW) yields dramatically better
-    results in the single digits rel err
+-possibilities: 
+    +study on whats different w/ scheduledGeneration_QLD/
+    scheduledGeneration_NSW that they are so strong at explaining
+    the data
+    +hardcode the timeseries nature (shift +x steps)
+    +create a dense, cnn+dense model with 5 outputs to
+    +utilise timeseries nature w/ DNNs
+    +wee HP tuning?
+    +graph of results
+    +dimensionalty reduction?
+    +cluster?
+    +branched architecture?
+
+https://colab.research.google.com/drive/1BgCDxVdVc0MAe_kC0waMGUV9ShcWW0hM
+
+https://stanford.edu/~shervine/blog/keras-how-to-generate-data-on-the-fly
+generator for batch creation
+
+https://www.tensorflow.org/guide/keras/train_and_evaluate
+custom losses
+
+https://www.pyimagesearch.com/2018/06/04/keras-multiple-outputs-and-multiple-losses/
+multi output multi loss model
+
+https://keras.io/getting-started/faq/#how-can-i-use-keras-with-datasets-that-dont-fit-in-memory
+generators
