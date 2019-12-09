@@ -62,6 +62,10 @@ def fetch_data(params):
     id = params['id']
     start_time = params['start_time']
     end_time = params['end_time']
+    if params['filter']:
+      filter_ = params['filter']
+    else:
+      filter_ = None
   
     ids= {'electricity_NSW': 'ecc5263e-83b6-42d6-8852-64beffdf204e',
           'weather_QLD': 'a46f461f-f7ee-4cc5-a1e4-569960ea5ed8',
@@ -109,7 +113,7 @@ def fetch_data(params):
       #     value=amphora_client.Tsx(tsx='$event.temperature'), 
       #     aggregation=amphora_client.Tsx("avg($value)"))
       # get the series (plural, if so defined above in value_dict!), save to time_series_data
-      get_series = amphora_client.GetSeries([id], search_span= time_range, inline_variables=value_dict)
+      get_series = amphora_client.GetSeries([id], filter=filter_, search_span= time_range, inline_variables=value_dict)
       time_series_data = ts_api.time_series_query_time_series(amphora_client.QueryRequest(get_series= get_series))
       
       # ingest data into pd.DataFrame
