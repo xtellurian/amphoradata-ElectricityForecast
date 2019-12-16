@@ -8,13 +8,15 @@
 *.fits
 *.svg
 *.csv
-.zip
-.ipynb_checkpoints
-.csv
-.ckpt*
-.h5
-.pb
-.data
+*.zip
+*.ipynb_checkpoints
+*.csv
+*.ckpt*
+*.h5
+*.pb
+*.data
+*.sav
+*.joblib
 
 
 # Folders
