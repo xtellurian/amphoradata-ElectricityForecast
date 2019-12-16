@@ -1,5 +1,6 @@
 from sklearn.ensemble import RandomForestRegressor, ExtraTreesRegressor
 from sklearn import linear_model
+import statsmodels.api as sm
 import pandas as pd
 import numpy as np
 from datetime import date
@@ -44,7 +45,7 @@ def plot_two_vars(df_var_1,col_num1, df_var_2, col_num2, start='2019-11-10', end
 
 def create_diffs(df, cols, _period=1):
     """
-    Creates differenciated columns, with a period of differentiation of _period index steps
+    Creates differentiated columns, with a period of differentiation of _period index steps
 
     df: pd DataFrame
     cols: list of column numbers to be differentiated
@@ -342,10 +343,12 @@ def reshape_for_CNN(df):
     array into the right shape of (nrow, ncols, 1) corresponding to
     (batch_size, steps, input_dim) necessary for Conv1D input.
     """
+    
     arr = np.array(df.values)
-    nrows, ncols = arr.shape
-
-    return arr.reshape(nrows, ncols, 1)
+    nrows, ncols = arr.shape # pylint: disable=unpacking-non-sequence
+    
+    return arr.reshape(nrows, ncols, 1)  # pylint: disable=too-many-function-args
+    
 
 def MAE_CNN(predictions, true_values):
     """
