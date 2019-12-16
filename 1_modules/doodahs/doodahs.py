@@ -8,6 +8,8 @@ from datetime import date
 # import holidays
 import matplotlib.pyplot as plt
 
+from tensorflow.keras.callbacks import LearningRateScheduler # pylint: disable=import-error
+import math
 from keras.layers import Input, Dense, concatenate, LeakyReLU
 from keras.layers import Conv1D, Dropout, MaxPooling1D, Flatten
 from keras.models import Model
@@ -257,7 +259,7 @@ def func_CNN_1(df_, nn_name='func_CNN'):
 
     conv_1 = Conv1D(32, 3, padding='causal', activation='relu')(layer)
     conv_1 = LeakyReLU(alpha=0.03)(conv_1)
-    drop_1 = Dropout(0.3)(conv_1)
+    drop_1 = Dropout(0.4)(conv_1)
     flat = Flatten()(drop_1)
     Dense_1 = Dense(128, activation='relu')(flat)
     output_layer = Dense(4)(Dense_1)
@@ -269,6 +271,20 @@ def func_CNN_1(df_, nn_name='func_CNN'):
     model_CNN = Model(inputs = [input_NSW,input_QLD,input_VIC,input_SA], outputs=output_layer, name=nn_name)
 
     return model_CNN
+
+def step_decay(epoch,initialLR=0.1,drop=0.5,drop_per_epoch=15):
+    '''
+    Sets the learning rate to gradually decay per epoch with a rate decay given by `rop`,
+    and a drop step every `drop_per_epoch`.
+    The changes every few apochs happen through the callbacks tensorflow submodule.
+    c.f. https://www.tensorflow.org/api_docs/python/tf/keras/callbacks/LearningRateScheduler
+    '''
+    initial_learning_rate = initialLR
+    drop = drop
+    epochs_drop = drop_per_epoch
+    learning_rate = initial_learning_rate * math.pow(drop,  
+           math.floor((1+epoch)/epochs_drop))
+    return LearningRateScheduler(learning_rate,verbose=0)
 
 def func_CNN_2(df_, nn_name='func_CNN'):
     """
@@ -298,17 +314,17 @@ def func_CNN_2(df_, nn_name='func_CNN'):
     
     # CNN block for all four states
     NSW1 = cnn_lrelu_block(all2, name='NSW1')
-    drop_NSW1 = Dropout(0.3)(NSW1)
-    NSW2 = cnn_lrelu_block(drop_NSW1, filters=32, kernel=3, name='NSW2')
+    drop_NSW1 = Dropout(0.4)(NSW1)
+    NSW2 = cnn_lrelu_block(drop_NSW1, filters=64, kernel=5, name='NSW2')
     QLD1 = cnn_lrelu_block(all2, name='QLD1')
-    drop_QLD1 = Dropout(0.3)(QLD1)
-    QLD2 = cnn_lrelu_block(drop_QLD1, filters=32, kernel=3, name='QLD2')
+    drop_QLD1 = Dropout(0.4)(QLD1)
+    QLD2 = cnn_lrelu_block(drop_QLD1, filters=64, kernel=5, name='QLD2')
     VIC1 = cnn_lrelu_block(all2, name='VIC1')
-    drop_VIC1 = Dropout(0.3)(VIC1)
-    VIC2 = cnn_lrelu_block(drop_VIC1, filters=32, kernel=3, name='VIC2')
+    drop_VIC1 = Dropout(0.4)(VIC1)
+    VIC2 = cnn_lrelu_block(drop_VIC1, filters=64, kernel=5, name='VIC2')
     SA1 = cnn_lrelu_block(all2, name='SA1')
-    drop_SA1 = Dropout(0.3)(SA1)
-    SA2 = cnn_lrelu_block(drop_SA1, filters=32, kernel=3, name='SA2')
+    drop_SA1 = Dropout(0.4)(SA1)
+    SA2 = cnn_lrelu_block(drop_SA1, filters=64, kernel=5, name='SA2')
     
     # Dense block
     NSW3 = Flatten()(NSW2)
@@ -364,6 +380,7 @@ def MAE_CNN(predictions, true_values):
     rel = round(np.mean(100*np.abs((predictions-true_values)/true_values)),3)
     
     return mae, rel
+
 def banana():
     '''
     to test a setting
