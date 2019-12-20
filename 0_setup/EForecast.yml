@@ -14,7 +14,7 @@ dependencies:
   - scikit-learn
   - requests
   - joblib
-  #- pip:
-  #  - gputil
+  - pip:
+    - amphoradata
   - pandas
   - holidays

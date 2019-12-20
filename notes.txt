@@ -37,3 +37,14 @@ multi output multi loss model
 
 https://keras.io/getting-started/faq/#how-can-i-use-keras-with-datasets-that-dont-fit-in-memory
 generators
+
+
+TODO:
+
+
+shift values in y back by x
+Data viz (more!)
+hyper tuning 2.0 for CNN_2
+LSTMs?
+
+RFR create multiprocessing
