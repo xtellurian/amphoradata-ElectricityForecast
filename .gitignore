@@ -3,6 +3,7 @@
 *.png
 *.pdf
 *.idea/
+notes.txt
 ._*
 *.gif
 *.fits
@@ -17,17 +18,16 @@
 *.data
 *.sav
 *.joblib
-
+*.pyc
 
 # Folders
 __pycache__
+2_raw_data/
+3_eda/
+5_models/
+6_predictions/
+7_logs
 .vscode/
 */.ipynb_checkpoints/
 */__pycache__/
-0_setup/
-2_raw_data/
-3_processed_data/
-4_logs/
-5_models/
-z_other/
 dask-worker-space/
