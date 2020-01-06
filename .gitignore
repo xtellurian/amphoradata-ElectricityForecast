@@ -2,8 +2,7 @@
 .DS_Store
 *.png
 *.pdf
-*.idea/
-notes.txt
+./notes.txt
 ._*
 *.gif
 *.fits
@@ -26,7 +25,8 @@ __pycache__
 3_eda/
 5_models/
 6_predictions/
-7_logs
+7_logs/
+.idea/
 .vscode/
 */.ipynb_checkpoints/
 */__pycache__/
