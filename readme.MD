@@ -2,7 +2,7 @@
 Talk about why amphoradata, why spot prices of interest
 
 ## talk about data importance, why amphora
-For data science, and specifically for forecasting problems, accurate predictions require large amounts of data. Afterall, making a prediction on something not seen before by the model, will be difficult in most situations. Amphora offers...
+For data science, and specifically for forecasting problems, accurate predictions require large amounts of data. Making a prediction on something not seen before by the model, will be difficult in most situations. Amphora offers...
 <!-- screenshot of UI of amphora + description-->
 
 ##  talking about koz.ai
