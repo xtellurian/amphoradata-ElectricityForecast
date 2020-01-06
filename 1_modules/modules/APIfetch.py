@@ -11,10 +11,10 @@ from amphora_client.rest import ApiException
 from amphora_client.configuration import Configuration
 from amphora_extensions.file_uploader import FileUploader
 from amphora_client import SignalDto
+import os
 
-useful = {'API-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiTUFSS1VTLkRPTExNQU5OQEVMSUlaQS5DT00uQVUiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjhiMjk1OWM3LTY0ZWUtNGQ1YS1hN2E0LTQ0NjA1NWQ0MjljZSIsImV4cCI6MTU3NTUwNzc3NSwiaXNzIjoiYW1waG9yYWRhdGEuY29tIiwiYXVkIjoiYW1waG9yYWRhdGEsY29tIn0.rdpeD7zOrsLTlkeOnX-p5fjf5jxZZE8TKmf5DJ0ElPo',
-  'username': 'markus.dollmann@eliiza.com.au',
-  'password': 'fobra1-penqef-Bebnuj'}
+useful = {'username': os.environ.get('usrname'),
+          'password': os.environ.get('password')}
 
 def establish_connection():
     '''
@@ -26,6 +26,8 @@ def establish_connection():
     configuration.host = 'https://beta.amphoradata.com'
     # create instance of API class, creates an unauthenticated client
     auth_api = amphora_client.AuthenticationApi(amphora_client.ApiClient(configuration)) 
+    # if function throws ValueError 'username'/'password' must not be none, then the environment
+    # variables are not set, c.f. setup-EForecast.sh and readme.MD section Quickstart
     token = auth_api.authentication_request_token(token_request = amphora_client.TokenRequest(username = useful['username'], password = useful['password']))
     
     return token
@@ -220,17 +222,17 @@ def upload_series(df, params1, id_=''):
 
 
 if __name__ == "__main__":
-  ## test upload functionality:
+  ## very lazy testing of upload functionality:
   # Create test DataFrame to be upload
   ananas = pd.DataFrame([[0,1,2],[3,4,5],[6,7,8],[9,10,11]],
     index=[datetime(2019,12,2,11,0,0),datetime(2018,12,2,12,0,0),
     datetime(2017,12,2,13,0,0),datetime(2016,12,2,14,0,0)], 
     columns=['banana','appl','citron'])
 
-
+  # create test settings for the test amphora:
   params = {'name': "Test - now also with signals",
         'description': "Day 501 - still no signals.",
         'price': 0
         }
-  # upload:      
+  # upload to amphora data:      
   upload_series(ananas, params, id_='bab66317-3e8a-4e3f-94b2-aa5fe890dc11')

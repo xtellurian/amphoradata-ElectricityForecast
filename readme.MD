@@ -1,6 +1,12 @@
 # Predicting Electricity Spot Prices using Amphora Data
 Talk about why amphoradata, why spot prices of interest
 
+## quick start on the project
+1. create folder for project, run `git clone https://github.com/1112114641/amphoradata-ElectricityForecast.git`, or download manually from `https://github.com/1112114641/amphoradata-ElectricityForecast`
+2. modify `0_setup/setup-EForecast.sh` to contain right amphora data password and username
+3. run `bash 0_setup/setup-EForecast.sh` to setup the environment, install python packages and set environment variables
+4. take care to ensure the variables $usrname and $password are set, so connection to amphora API possible. To test this, run `echo $usrname` or `echo $password` in your shell
+
 ## talk about data importance, why amphora
 For data science, and specifically for forecasting problems, accurate predictions require large amounts of data. Making a prediction on something not seen before by the model, will be difficult in most situations. Amphora offers...
 <!-- screenshot of UI of amphora + description-->
