@@ -1,4 +1,4 @@
-# Predicting Electricity Spot Prices using [Amphora Data](https://amphoradata.com) and Koz.ai
+# Predicting Electricity Spot Prices using [Amphora Data](https://amphoradata.com) and [Koz.ai](https://www.koz.ai)
 
 ## Cui Bono?
 
@@ -46,7 +46,7 @@ You may also wish to be exposed because as long as you don't consume during peri
 
 ## How to manage costs when exposed to the wholesale price.
 
-Best case scenario, you need an automated and robust prediction of the price, and an automated go/no-go decision framework. [Amphora Data](https://AmphoraData.com) and Koz.ai have partnered to develop this open source experimentation tool for achieving just that. We hope you find it useful :)
+Best case scenario, you need an automated and robust prediction of the price, and an automated go/no-go decision framework. [Amphora Data](https://amphoraata.com) and Koz.ai have partnered to develop this open source experimentation tool for achieving just that. We hope you find it useful :)
 
 ## quick start on the project
 1. Run `git clone https://github.com/1112114641/amphoradata-ElectricityForecast.git` in kozai terminal, or download from github `https://github.com/1112114641/amphoradata-ElectricityForecast` and then manually upload to kozai
@@ -56,11 +56,21 @@ Best case scenario, you need an automated and robust prediction of the price, an
 4. Take care to ensure the variables $usrname and $password are set, so connection to amphora API possible. To test this, run `echo $usrname` or `echo $password` in your shell
 5. Open the `ipynb` file in the base directory, which is now ready to be run
 
-## talk about data importance, why amphora
-For data science, and specifically for forecasting problems, accurate predictions require large amounts of data. Making a prediction on something not seen before by the model, will be difficult in most situations. Often, more data is not sufficient though, and other data, other variables help to improve model performance. Amphora offers...
+# Better data, and more of it.
 
-![Example of the layout of the contents of an Amphora](4_images/amphoradataUI.png)
-<!-- screenshot of UI of amphora + description-->
+For data science, and specifically for forecasting problems, accurate predictions require large amounts of data. Making a prediction on something not seen before by the model, will be difficult in most situations. Often, more data is not sufficient though, and other data, other variables help to improve model performance. 
+
+Amphora Data is a platform to discover, package, and trade data relevant to agriculture, either in real-time, or historical. An Amphora is an abstraction on data that allows us to generalise on it's contents. Each Amphora generally contains a small but useful dataset that's consistently updating. Amphorae provide a standard interface to describing, accessing, and monetising data so that each additional datasource is easier to include than the last.
+
+The screenshot below shows the Amphora web application displaying metadata from a Meat and Livestock Australia data feed. In fact, any organisation on Amphora Data can create and trade arbitrary data as they like, and the number of Amphora is growing consistently. All the data used in this project are available at [beta.amphoradata.com](https://beta.amphoradata.com)
+
+![Labelled screenshot of Amphora Data web application](images/screenshot-amphoraBreakdown.png)
+
+Amphora Data also provide Python (as seen in this project) and Dotnet SDKs, and an API specification, so you can integrate data into your own applications or data science tools and processes.
+
+Amphora Data is currently in private beta. For access visit [amphoradata.com/contact-us](https://amphoradata.com/contact-us)
+
+
 
 ##  talking about koz.ai
 Kozai, offers a very facile method for cloud data science with plugins allowing for direct git versioning of the entire project.
