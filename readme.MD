@@ -2,7 +2,7 @@
 
 ## Cui Bono?
 
-Why do we care about predicting the price of electricity? Well, because unlike most retail consumers, many commerical customers are exposed to the *wholesale price* of electricty, which is extremely variable. There is a fundamental conflict at play - businesses want price certainty to plan their daily operations, but the NEM requires price variability to shift production along the supply/ demand curve. In this paper, we present a small contribution to resolving this conflict. 
+Why do we care about predicting the price of electricity? Well, because unlike most retail consumers, many commerical customers are exposed to the *wholesale price* of electricty, which is extremely variable. There is a fundamental conflict - businesses want price certainty to plan their daily operations, but the NEM requires price variability to shift production along the supply/ demand curve. In this paper, we present a small contribution to resolving this conflict. 
 
 ## What is the NEM?
 
@@ -26,15 +26,17 @@ Now compare the 'normal' week above, to the week that immediately followed it in
 
 A major driver of electricity demand (and therefore supply, as the two must be equal) is the weather. The plot of temperature below shows that Adelaide was experiencing a serious heatwave from December 17 to December 20, with the price spike occuring the evening before the hottest and last day. Keen observers will also note that the minimum overnight temperature was high at 28 degrees.
 
+We've highlighted the same period for each day of the heatwave (7 - 9 pm), which coincides with the price spike on the last day. Temperatures are significant, because higher temperatures mean more air-conditioning (i.e. greater consumption) and often less efficient plant. Wind speed is also significant (although not necessarily just in Adelaide) because of the high penetration of wind energy in South Australia.
+
 ![Plot of temperature and windspeed during abnormal week](images/plot-weatherAroundSpike-Adelaide.png)
 
 ## Counting the cost.
 
-If your business was regularly running plant at 7pm, and that plant consumed ~250KW of power, on a normal day you'd spend about $15/hour to run the plant. Compare that to the abnormal day on December 19. On that day, at 7pm, you'd spend $1,500 in a single hour!
+If your business was regularly running plant at 7pm, and that plant consumes ~250 kW of power, on a normal day you'd spend about $15/hour to run the plant. Compare that to the abnormal day on December 19. On that day, at 7pm, you'd spend $1,500 in a single hour!
 
 ## Why hasn't this happened to me?
 
-Luckily for regular consumers, electricity retailers (think AGL, Origin etc.) protect you from price variability by hedging against shortfalls in generation or consumption. Therefore, no ridiculously expensive days. Consumers are paying for the price spikes, it's just flattened out over the entire year.
+Luckily for regular consumers, electricity retailers (think AGL, Origin etc.) protect you from price variability by hedging against shortfalls in generation. Therefore, no ridiculously expensive days. Consumers *are* paying for the price spikes, it's just averaged out over the entire year.
 
 ## So why would anyone want to be exposed to the variable price?
 
