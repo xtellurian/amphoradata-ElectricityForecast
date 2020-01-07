@@ -1,5 +1,50 @@
-# Predicting Electricity Spot Prices using Amphora Data
-Talk about why amphoradata, why spot prices of interest
+# Predicting Electricity Spot Prices using [Amphora Data](https://amphoradata.com) and Koz.ai
+
+## Cui Bono?
+
+Why do we care about predicting the price of electricity? Well, because unlike most retail consumers, many commerical customers are exposed to the *wholesale price* of electricty, which is extremely variable. There is a fundamental conflict at play - businesses want price certainty to plan their daily operations, but the NEM requires price variability to shift production along the supply/ demand curve. In this paper, we present a small contribution to resolving this conflict. 
+
+## What is the NEM?
+
+The Australian National Electricity Market (NEM) is a wholesale electricity market in which generators sell electricity and retailers buy it to on-sell to consumers. There are over 100 generators and retailers participating in the market, so it’s highly competitive and therefore an efficient way of maintaining relatively competitive electricity prices in the wholesale market.
+
+All electricity sales are traded through the NEM. It is a wholesale market and prices fluctuate in response to supply and demand at any point in time. The NEM is split into 5 regions (QLD, NSW, VIC, TAS, SA), and prices are set per-region.
+
+![Map of the NEM regions](images/map-NEM.png)
+
+## What do the prices look like?
+
+> All plots and data below are available at [Amphora Data](https://amphoradata.com).
+
+Electricity prices are set every 5 minutes (the dispatch price) and 6 dispatch prices are averaged every half hour to generate the spot price. Below are the prices for a 'normal' week in South Australia. We observe that the price remains relatively close to $50, although occasionally dropping and [becoming negative](https://www.afr.com/companies/energy/why-electricity-spot-prices-are-hitting-zero-20190723-p52a08). At these times, consumers of electricity are actually paid to consume.
+
+![Plot of normal electricity price and scheduled generation in a week](images/plot-normalElectricityPriceAndGen-SA.png)
+
+Now compare the 'normal' week above, to the week that immediately followed it in December of 2019. Clearly things are very different. The 'normal' variability ~$50 is no longer visible, as the graph is dominated by a huge spike on December 19, when the price jumped to over $8,000, approximately 2 orders of magnitude larger than the maximum for the days either side. We also observe that the maxiumum scheduled generation has doubled compared with the previous week. So what's going on?
+
+![Plot of abnormal electricity price and scheduled generation in a week](images/plot-spikeElectricityPriceAndGen-SA.png)
+
+A major driver of electricity demand (and therefore supply, as the two must be equal) is the weather. The plot of temperature below shows that Adelaide was experiencing a serious heatwave from December 17 to December 20, with the price spike occuring the evening before the hottest and last day. Keen observers will also note that the minimum overnight temperature was high at 28 degrees.
+
+![Plot of temperature and windspeed during abnormal week](images/plot-weatherAroundSpike-Adelaide.png)
+
+## Counting the cost.
+
+If your business was regularly running plant at 7pm, and that plant consumed ~250KW of power, on a normal day you'd spend about $15/hour to run the plant. Compare that to the abnormal day on December 19. On that day, at 7pm, you'd spend $1,500 in a single hour!
+
+## Why hasn't this happened to me?
+
+Luckily for regular consumers, electricity retailers (think AGL, Origin etc.) protect you from price variability by hedging against shortfalls in generation or consumption. Therefore, no ridiculously expensive days. Consumers are paying for the price spikes, it's just flattened out over the entire year.
+
+## So why would anyone want to be exposed to the variable price?
+
+Remember that during the normal week of operations, the price actually went negative, meaning that anyone exposed and consuming electricity during that period was actually paid by the market. For our imaginary business, for the hour when price dropped to $-30, they would have actually been paid about $7 to run their plant - a $22 improvement on the typical situation.
+
+You may also wish to be exposed because as long as you don't consume during periods of high prices, your total electricity bill will be significantly smaller because you aren't paying a retailer to hedge the market for you.
+
+## How not to go bankrupt when exposed to the wholesale price.
+
+Best case scenario, you need an automated and robust prediction of the price, and an automated go/no-go decision framework. [Amphora Data](https://AmphoraData.com) and Koz.ai have partnered to develop this open source experimentation tool for achieving just that. We hope you find it useful :)
 
 ## quick start on the project
 1. create folder for project, run `git clone https://github.com/1112114641/amphoradata-ElectricityForecast.git`, or download manually from `https://github.com/1112114641/amphoradata-ElectricityForecast`
