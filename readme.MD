@@ -2,8 +2,6 @@
 
 ## Cui Bono?
 
-In this paper, we present a small contribution to resolving this conflict. 
-
 Predicting the price of electricity is increasingly important. The wholesale market of electricity is extremely variable and many companies and organisations are highly exposed. Whilst they can benefit from periods of low prices (e.g. < $ 50 /MWh) they also face prices of up to $ 14000 /MWh. There is a fundamental conflict - businesses want price certainty to plan their daily operations, but the NEM requires price variability to shift production along the supply/ demand curve. Here, we present a small contribution to resolving this conflict with methods and tools for better predicting price fluctuations, which can help companies manage the use of their electricity accordingly.
 
 ## What is the NEM?
