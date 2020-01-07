@@ -1,5 +1,4 @@
-#!/usr/bin/env bash
-conda create -f EForecast.yml
+#conda env create -f EForecast.yml
 conda list
-export usrname='ENTER DESIRED LOG IN TO AMPHORA HERE'
-export password='enter desired password here.'
+export usrname='markus.dollmann@eliiza.com.au'
+export password='obas33-penage=Ensu1k'
