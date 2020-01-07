@@ -23,6 +23,7 @@
 __pycache__
 2_raw_data/
 3_eda/
+4_images/
 5_models/
 6_predictions/
 7_logs/

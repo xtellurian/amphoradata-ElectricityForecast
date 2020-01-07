@@ -13,8 +13,8 @@ from amphora_extensions.file_uploader import FileUploader
 from amphora_client import SignalDto
 import os
 
-useful = {'username': os.environ.get('usrname'),
-          'password': os.environ.get('password')}
+useful = {'username': 'markus.dollmann@eliiza.com.au',#os.environ.get('usrname'),
+          'password': 'obas33-penage=Ensu1k'}#os.environ.get('password')}
 
 def establish_connection():
     '''
@@ -54,7 +54,6 @@ def fetch_data(params):
     returns
     pd.DataFrame
 
-    TODO: implement muli-ID fetch
     '''
     id = params['id']
     start_time = params['start_time']
@@ -125,8 +124,8 @@ def fetch_data(params):
       time_series_data = ts_api.time_series_query_time_series(amphora_client.QueryRequest(get_series= get_series))
         
       # ingest data into pd.DataFrame
-      apple = []
       # create list of returned timeseries
+      apple = []
       for _ in range(len(time_series_data.properties)):
         apple.append(np.array(time_series_data.properties[_].values).reshape((len(time_series_data.properties[_].values))))
 

@@ -130,16 +130,16 @@ def linear_model_predictions(training_features,test_feautres,valid_param):
     test_features: pd.DataFrame (or series) containing trhe 'y' data
     valid_param: data for which y values are to be inferred
     """
-    model = linear_model.LinearRegression()
+    model = linear_model.LinearRegression(n_jobs=-1)
     model.fit(training_features, test_feautres)
     return model, model.predict(valid_param)
 
-def model_MAE(predictions, validation_data, print_result=False):
-    mae = np.mean(np.abs(predictions-validation_data))
+def model_MSE(predictions, validation_data, print_result=False):
+    mse = np.mean((predictions-validation_data)**2)
     if print_result:
-        return print("The model is inaccurate by $%.2f on average." % mae[0])
+        return print("The model is inaccurate by $%.2f on average." % mse[0])
     else:
-        return mae[0]
+        return mse[0]
 
 def rel_error(model, predictions, test_data, print_result=False):
     rel = np.mean(100*np.abs((predictions-test_data)/test_data))
@@ -252,37 +252,37 @@ def step_decay(epoch,initialLR=0.1,drop=0.5,drop_per_epoch=15):
            math.floor((1+epoch)/epochs_drop))
     return LearningRateScheduler(learning_rate,verbose=0)
 
-def MAE_CNN(predictions, true_values):
+def MSE_CNN(predictions, true_values):
     """
     calculates the error per returned
 
-    returns mae np.array, rel error np.array 
+    returns mse np.array, rel error np.array 
     """
     predictions = pd.DataFrame(predictions)
     predictions.columns = true_values.columns
     predictions.index = true_values.index
     
-    mae = round(np.mean(np.abs(predictions - true_values)),3)
+    mse = round(np.mean((predictions - true_values)**2),3)
     rel = round(np.mean(100*np.abs((predictions-true_values)/true_values)),3)
     
-    return mae, rel
+    return mse, rel
 
-def MAE_CNN_df(predictions, true_values):
+def MSE_CNN_df(predictions, true_values):
     """
     calculates the error per returned
 
-    returns mae np.array, rel error np.array 
+    returns mse np.array, rel error np.array 
     """
-    mae = round(np.mean(np.abs(predictions - true_values)),3)
+    mse = round(np.mean((predictions - true_values)**2),3)
     rel = round(np.mean(100*np.abs((predictions-true_values)/true_values)),3)
     
-    return mae, rel
+    return mse, rel
 
-def MAE_CNN_3(predictions, true_values):
+def MSE_CNN_3(predictions, true_values):
     """
     calculates the error per returned
 
-    returns mae np.array, rel error np.array 
+    returns mse np.array, rel error np.array 
     """
     predictions = [predictions[_].reshape((len(predictions[_],))) for _ in range(len(predictions))]
 
@@ -290,10 +290,10 @@ def MAE_CNN_3(predictions, true_values):
     df.columns = true_values.columns
     df.index = true_values.index
     
-    mae = round(np.mean(np.abs(predictions - true_values)),3)
+    mse = round(np.mean((predictions - true_values)**2),3)
     rel = round(np.mean(100*np.abs((predictions-true_values)/true_values)),3)
     
-    return mae, rel
+    return mse, rel
 
 
 def banana():
@@ -302,11 +302,11 @@ def banana():
     '''
     return print('banana')
     
-# def MAE_CNN2(model, data, true_values):
+# def MSE_CNN2(model, data, true_values):
 #     """
 #     calculates the error per returned
 
-#     returns mae np.array, rel error np.array 
+#     returns mse np.array, rel error np.array 
 #     """
 #     predictions = model.predict(data)
 #     temp_ = pd.DataFrame(index=len(predictions), columns=true_values.columns)
@@ -315,9 +315,7 @@ def banana():
 #     predictions.columns = true_values.columns
 #     predictions.index = true_values.index
     
-#     mae = round(np.mean(np.abs(predictions - true_values)),3)
+#     mse = round(np.mean((predictions - true_values)**2),3)
 #     rel = round(np.mean(100*np.abs((predictions-true_values)/true_values)),3)
     
-#     return mae, rel
-
-# load electricity and weather data from the amphora API
+#     return mse, rel
