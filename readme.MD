@@ -1,14 +1,20 @@
 # Predicting Electricity Spot Prices using Amphora Data
+Give outline of what happened
+
 Talk about why amphoradata, why spot prices of interest
 
 ## quick start on the project
-1. create folder for project, run `git clone https://github.com/1112114641/amphoradata-ElectricityForecast.git`, or download manually from `https://github.com/1112114641/amphoradata-ElectricityForecast`
-2. modify `0_setup/setup-EForecast.sh` to contain right amphora data password and username
-3. run `bash 0_setup/setup-EForecast.sh` to setup the environment, install python packages and set environment variables
-4. take care to ensure the variables $usrname and $password are set, so connection to amphora API possible. To test this, run `echo $usrname` or `echo $password` in your shell
+1. Run `git clone https://github.com/1112114641/amphoradata-ElectricityForecast.git` in kozai terminal, or download from github `https://github.com/1112114641/amphoradata-ElectricityForecast` and then manually upload to kozai
+2. Run `cd 0_setup`, then execute `export usrname='yourAmphoraUsername'`, and `export password='yourAmphoraPassword'` to set the amphora data password and username
+3. Run `conda env create -f EForecast.yml` to setup the environment, install python packages and then activate the env with `conda activate EForecast`
+ - if a `permission denied` error occurs, change rights with `chmod a+x EForecast.yml` to make the file executable, run 3., then change back to base dir with `cd ..`
+4. Take care to ensure the variables $usrname and $password are set, so connection to amphora API possible. To test this, run `echo $usrname` or `echo $password` in your shell
+5. Open the `ipynb` file in the base directory, which is now ready to be run
 
 ## talk about data importance, why amphora
-For data science, and specifically for forecasting problems, accurate predictions require large amounts of data. Making a prediction on something not seen before by the model, will be difficult in most situations. Amphora offers...
+For data science, and specifically for forecasting problems, accurate predictions require large amounts of data. Making a prediction on something not seen before by the model, will be difficult in most situations. Often, more data is not sufficient though, and other data, other variables help to improve model performance. Amphora offers...
+
+![Example of the layout of the contents of an Amphora](4_images/amphoradataUI.png)
 <!-- screenshot of UI of amphora + description-->
 
 ##  talking about koz.ai
@@ -21,6 +27,10 @@ Moreover, it allows for the easy move between different work locations, obviatin
  - running of task montoring idk
 
 <!-- screenshot of prelim UI kozai + description of to come-->
+
+<!--### Connecting e.g. VSCode to a kozai sesh
+ follow e.g. [here](https://blog.ouseful.info/2019/02/11/connecting-to-a-remote-jupyter-notebook-server-running-on-digital-ocean-from-microsoft-vs-code/ "Connect VSCode to external Kernel")
+-->
 
 ## talking about the datascience
 structure of eda, API access to amphora, revisit modelling/multiple models, choice of model by lowest error criterion
