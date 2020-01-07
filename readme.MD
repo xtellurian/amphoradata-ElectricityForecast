@@ -52,7 +52,7 @@ You may also wish to be exposed because as long as you don't consume during peri
 
 ### How to manage costs when exposed to the wholesale price.
 
-Best case scenario, you need an automated and robust prediction of the price, and an automated go/no-go decision framework. [Amphora Data](https://AmphoraData.com) and [Koz.ai](https://koz.ai) have partnered to develop this open source experimentation tool for achieving just that. We hope you find it useful :)
+Best case scenario, you need an automated and robust prediction of the price, and an automated go/no-go decision framework. [Amphora Data](https://amphoradata.com) and Koz.ai have partnered to develop this open source experimentation tool for achieving just that. We hope you find it useful :)
 
 ## Better data, and more of it.
 
