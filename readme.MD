@@ -2,7 +2,9 @@
 
 ## Cui Bono?
 
-Why do we care about predicting the price of electricity? Well, because unlike most retail consumers, many commerical customers are exposed to the *wholesale price* of electricty, which is extremely variable. There is a fundamental conflict - businesses want price certainty to plan their daily operations, but the NEM requires price variability to shift production along the supply/ demand curve. In this paper, we present a small contribution to resolving this conflict. 
+In this paper, we present a small contribution to resolving this conflict. 
+
+Predicting the price of electricity is increasingly important. The wholesale market of electricity is extremely variable and many companies and organisations are highly exposed. Whilst they can benefit from periods of low prices (e.g. < $ 50 /MWh) they also face prices of up to $ 14000 /MWh. There is a fundamental conflict - businesses want price certainty to plan their daily operations, but the NEM requires price variability to shift production along the supply/ demand curve. Here, we present a small contribution to resolving this conflict with methods and tools for better predicting price fluctuations, which can help companies manage the use of their electricity accordingly.
 
 ## What is the NEM?
 
@@ -44,7 +46,7 @@ Remember that during the normal week of operations, the price actually went nega
 
 You may also wish to be exposed because as long as you don't consume during periods of high prices, your total electricity bill will be significantly smaller because you aren't paying a retailer to hedge the market for you.
 
-## How not to go bankrupt when exposed to the wholesale price.
+## How to manage costs when exposed to the wholesale price.
 
 Best case scenario, you need an automated and robust prediction of the price, and an automated go/no-go decision framework. [Amphora Data](https://AmphoraData.com) and Koz.ai have partnered to develop this open source experimentation tool for achieving just that. We hope you find it useful :)
 
