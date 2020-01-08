@@ -1,6 +1,6 @@
 from sklearn.ensemble import RandomForestRegressor, ExtraTreesRegressor
 from sklearn import linear_model
-import statsmodels.api as sm
+#import statsmodels.api as sm
 import pandas as pd
 import numpy as np
 from datetime import date
@@ -29,7 +29,7 @@ def func_CNN_1(df_, nn_name='func_CNN'):
     input_VIC = Input(shape=(input_width,1), name='VIC')
     input_SA = Input(shape=(input_width,1), name='SA')
 
-    # create a dense, fully connected layer with a leaky relu activation fct:
+    # create a cnn layer with a leaky relu activation fct:
     NSW = Conv1D(64, (5), padding='causal')(input_NSW)
     NSW = LeakyReLU(alpha=0.00)(NSW)
     QLD = Conv1D(64, (5), padding='causal')(input_QLD)
@@ -41,10 +41,7 @@ def func_CNN_1(df_, nn_name='func_CNN'):
 
     layer = concatenate([SA,VIC,QLD,NSW], axis=-1)
 
-    conv_1 = Conv1D(32, (3), padding='causal', activation='relu')(layer)
-    conv_1 = LeakyReLU(alpha=0.03)(conv_1)
-    drop_1 = Dropout(0.4)(conv_1)
-    flat = Flatten()(drop_1)
+    flat = Flatten()(layer)
     Dense_1 = Dense(256, activation='relu')(flat)
     Dense_2 = Dense(64, activation='relu')(Dense_1)
     output_layer = Dense(4)(Dense_2)

@@ -80,7 +80,7 @@ To get started with the project, follow these steps to get set up:
 5. Open the `ipynb` file in the base directory, which is now ready to be run
 
 
-###  Simplfy ([Koz.ai](https://koz.ai)) your life
+###  Simplify ([Koz.ai](https://koz.ai)) your life
 
 With more data and larger projects compute power will soon become to little and correspondingly waiting times will increase. [Koz.ai](https://koz.ai) offers the solution to computers running hot and fans reaching the noise level of a vacuum cleaner, allowing to easily scale your projects from single CPU, or GPU, to an entire cluster for plentiful compute power.
 More importantly, with the built-in git support, versioning is simple and keeps your projects safe and allows for easy collaboration on a project. 
@@ -88,7 +88,7 @@ Thus, Koz.ai allows for the easy move between different work locations, obviatin
 
 For a project like the eletricity spot price predictions here, Koz.ai offers the perfect platform, while being reasonably priced, even offering a pay as you go model.
 
-![Screenshot of current state of Kozai UI](images/screenshot-amphoraBreakdown.png)
+![Screenshot of current state of Kozai UI](images/KozaiUI.png)
 **Figure 6:** Current state of the Kozai UI, with labels showing some of the Kozai intrinsic features.
 
 <!--### Connecting e.g. VSCode to a kozai sesh
@@ -101,7 +101,7 @@ The project was started with some exploratory data analysis (EDA), downloading s
 
 ### EDA
 
-As a start, as in most of my projects, data was checked for completeness, and missing values were interpolated with splines. To hard code the time-like nature of the data, new features were created consisting of the discrete $t_n-t_{n-1}$ time differences. 
+As a start, as in most of my projects, data was checked for completeness, and missing values were interpolated with splines. To hard code the time-like nature of the data, new features were created consisting of the discrete t<sub>n</sub>-t<sub>n-1</sub> time differences. 
 
 The correlations between the SA spot prices and all other variables were tested, yielding the result that the SA spot prices behave the most similar to the `scheduledGeneration` in VIC and SA, with the next most important features being weather related, influencing solar cell and/or windfarm performance.
 
@@ -119,6 +119,8 @@ windDirection_SA           0.206184
 d_cloudCover_SA            0.205422
 Name: price_SA, dtype: float64
 ```
+Comparing to the price's in NSW and QLD, a similar pattern emerges although the dominant features are
+
 Tweaking the linear model to contain only these top 9 features already improved the performance, showing a lower mean square error (MSE).
 
 ### Wrapper around Amphora Data Python SDK
@@ -135,11 +137,18 @@ Often, the central question for data science is the choice of the model, where s
 For this specific project, where thanks to Kozai the latter two were not a concern, a variety of differnt models and architectures were tested, among them simple linear models, random forests, but also dense neural nets, and convolutional neural nets. For all these models,the optimisation criterion was the mean square error (mse), as large errors are punished severly by it, and it is easily interpretable if the root of the mse is considered.
 Each model was trained on features _x_, with the corresponding spot prices lagged by 1 to 24h, to be able to predict for 1 to 24 timesteps into the future.
 
-The best performing model with the current amount of data (~45days) was the random forest of which the predictions are shown [below](#predictions), as selected by the overal minimal mse.
+The best performing model with the current amount of data (~45days) was a small convolutional neural net (CNN) optimising for each state individually, as selected by the overal minimal mean mse over 24 timesteps. The close second most accurate model being the random forest.
+
+As this model will be continuously run once a day, the model selection step will be repeated after every run, to ensure best model performance.
 
 ## Predictions
-predictions showed to be reasonable for the prediction of trends in spot prices, whereas the precise value mostly was off.
+![Predictions for the 8th Jan 2020](images/predictions.png)
+**Figure 7:** Predictions for electricity spot prices for the 8<sup>th</sup>January 2020.
+
+Predictions made by this model showed to be reasonable for the prediction of trends in spot prices with an average error of about , whereas the precise value mostly was off.
 <!-- 2x4 grid of date (4x) vs ((QLD,NSW, True),((VIC,SA,True)))-->
 
 ## Final note
 feature engineering, more involved models, etc.
+
+last step: change pw again -.-

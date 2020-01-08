@@ -1,6 +1,6 @@
 from sklearn.ensemble import RandomForestRegressor, ExtraTreesRegressor
 from sklearn import linear_model
-import statsmodels.api as sm
+#import statsmodels.api as sm
 import pandas as pd
 import numpy as np
 from datetime import date
@@ -14,9 +14,9 @@ from tensorflow.keras.layers import Input, Dense, concatenate, LeakyReLU # pylin
 from tensorflow.keras.layers import Conv1D, Dropout, MaxPooling1D, Flatten # pylint: disable=import-error
 from tensorflow.keras.models import Model # pylint: disable=import-error
 
-def func_CNN_3(df_, nn_name='func_CNN'):
+def func_NN_3(df_, nn_name='func_CNN'):
     """
-    Creates a 1D CNN model, with one input, four separate outputs. To use, remember to reshape the input into
+    Creates a 1D dense nn model, with one input, four separate outputs. To use, remember to reshape the input into
     the right (batch_size, steps, input_dim) shape!
     (c.f. e.g. https://github.com/bajibabu/GlottGAN/blob/master/keras/dcgan.py
     or https://datascience.stackexchange.com/questions/38957/keras-conv1d-for-simple-data-target-prediction,
@@ -30,7 +30,7 @@ def func_CNN_3(df_, nn_name='func_CNN'):
     # create a dense, fully connected layer with a leaky relu activation fct:
     all1 = Dense(1024, activation='relu')(input_all)
     
-    def dense_block(name_in,start,mid,end,activation='relu',dropout=0.4, lrelualpha=0.03, name=''):
+    def dense_block(name_in,start,mid,end,activation='relu',dropout=0.3, lrelualpha=0.03, name=''):
         Name2 = Dense(start, activation=activation)(name_in)
         drop_3 = Dropout(dropout)(Name2)
         Name4 = Dense(mid, activation=activation)(drop_3)
@@ -38,19 +38,15 @@ def func_CNN_3(df_, nn_name='func_CNN'):
         name_out = LeakyReLU(alpha=lrelualpha, name=name)(output_dense)
         return name_out
 
-    # CNN block for all four states
+    # Dense block for all four states
     NSW1 = dense_block(all1, 512,256,128, name='NSW1')
-    drop_NSW1 = Dropout(0.4)(NSW1)
-    NSW2 = dense_block(drop_NSW1, 128,64,32, name='NSW2')
+    NSW2 = dense_block(NSW1, 128,64,32, name='NSW2')
     QLD1 = dense_block(all1, 512,256,128, name='QLD1')
-    drop_QLD1 = Dropout(0.4)(QLD1)
-    QLD2 = dense_block(drop_QLD1, 128,64,32, name='QLD2')
+    QLD2 = dense_block(QLD1, 128,64,32, name='QLD2')
     VIC1 = dense_block(all1, 512,256,128, name='VIC1')
-    drop_VIC1 = Dropout(0.4)(VIC1)
-    VIC2 = dense_block(drop_VIC1, 128,64,32, name='VIC2')
+    VIC2 = dense_block(VIC1, 128,64,32, name='VIC2')
     SA1 = dense_block(all1, 512,256,128, name='SA1')
-    drop_SA1 = Dropout(0.4)(SA1)
-    SA2 = dense_block(drop_SA1, 128,64,32, name='SA2')
+    SA2 = dense_block(SA1, 128,64,32, name='SA2')
     
     
     NSW3 = dense_block(NSW2,16,8,1, name='NSW')
@@ -61,6 +57,6 @@ def func_CNN_3(df_, nn_name='func_CNN'):
     # model1.add(MaxPooling2D(pool_size=(2, 2)))
     # model1.add(Dropout(0.25))
     # model1.add(Flatten())
-    model_CNN = Model(inputs = input_all, outputs=[NSW3,QLD3,VIC3,SA3], name=nn_name)
+    model_NN = Model(inputs = input_all, outputs=[NSW3,QLD3,VIC3,SA3], name=nn_name)
 
-    return model_CNN
+    return model_NN

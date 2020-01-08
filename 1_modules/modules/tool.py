@@ -278,7 +278,7 @@ def MSE_CNN_df(predictions, true_values):
     
     return mse, rel
 
-def MSE_CNN_3(predictions, true_values):
+def MSE_NN_3(predictions, true_values):
     """
     calculates the error per returned
 

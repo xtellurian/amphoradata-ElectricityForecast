@@ -13,8 +13,8 @@ from amphora_extensions.file_uploader import FileUploader
 from amphora_client import SignalDto
 import os
 
-useful = {'username': 'markus.dollmann@eliiza.com.au',#os.environ.get('usrname'),
-          'password': 'obas33-penage=Ensu1k'}#os.environ.get('password')}
+useful = {'username': os.environ.get('usrname'),
+          'password': os.environ.get('password')}
 
 def establish_connection():
     '''
