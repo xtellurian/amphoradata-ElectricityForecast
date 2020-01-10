@@ -3,7 +3,8 @@ To skip the initial explanations, and dive into the project follow the [quick st
 
 ## Cui Bono?
 
-Predicting the price of electricity is increasingly important. The wholesale market of electricity is extremely variable and many companies and organisations are highly exposed. Whilst they can benefit from periods of low prices (e.g. < $ 50 /MWh) they also face prices of up to $ 14000 /MWh. There is a fundamental conflict - businesses want price certainty to plan their daily operations, but the NEM requires price variability to shift production along the supply/ demand curve. Here, we present a small contribution to resolving this conflict with methods and tools for better predicting price fluctuations, which can help companies manage the use of their electricity accordingly.
+Predicting the price of electricity is increasingly important. The wholesale market of electricity is extremely variable and many companies and organisations are highly exposed. Especially in agribusiness, where many farmers, are facing decreasing profit margins this can become an issue, and price spikes should be avoided.
+Whilst they can benefit from periods of low prices (e.g. < $ 50 /MWh) they also face prices of up to $ 14000 /MWh. There is a fundamental conflict - businesses want price certainty to plan their daily operations, but the NEM requires price variability to shift production along the supply/ demand curve. Here, we present a small contribution to resolving this conflict with methods and tools for better predicting price fluctuations, which can help companies manage the use of their electricity accordingly.
 
 ### What is the NEM?
 
@@ -134,8 +135,9 @@ As the amount of data at the start of the project was limited in terms of data s
 ### Model selection
 
 Often, the central question for data science is the choice of the model, where several competing factors have to be considered: explainability, model performance, model inference time, and model train time.
-For this specific project, where thanks to Kozai the latter two were not a concern, a variety of differnt models and architectures were tested, among them simple linear models, random forests, but also dense neural nets, and convolutional neural nets. For all these models,the optimisation criterion was the mean square error (mse), as large errors are punished severly by it, and it is easily interpretable if the root of the mse is considered.
-Each model was trained on features _x_, with the corresponding spot prices lagged by 1 to 24h, to be able to predict for 1 to 24 timesteps into the future.
+For this specific project, where thanks to Kozai the latter two were not a concern, a variety of differnt models and architectures were tested, among them simple linear models, random forests, but also dense neural nets, and recurrent, and convolutional neural nets. For all these models,the optimisation criterion was the mean square error (mse), as large errors are undesired here, and it is easily interpretable if the root of the mse is considered, yielding an error in A$.
+Each model was trained on features _x_, with the corresponding spot prices lagged by 1 to 12h, to be able to predict for 1 to 12 timesteps into the future.
+The reason for these 12h prediction windows is rapidly decreasing forecast quality for longer periods, and a more accurate prediction of the windows between 4-9pm, and 4-10am, where most price spikes occur.
 
 The best performing model with the current amount of data (~45days) was a small convolutional neural net (CNN) optimising for each state individually, as selected by the overal minimal mean mse over 24 timesteps. The close second most accurate model being the random forest.
 
@@ -143,12 +145,20 @@ As this model will be continuously run once a day, the model selection step will
 
 ## Predictions
 ![Predictions for the 8th Jan 2020](images/predictions.png)
-**Figure 7:** Predictions for electricity spot prices for the 8<sup>th</sup>January 2020.
+**Figure 7:** Predictions for electricity spot prices for the 7<sup>th</sup>January 2020.
 
 Predictions made by this model showed to be reasonable for the prediction of trends in spot prices with an average error of about , whereas the precise value mostly was off.
+
+On a Kozai single GPU instance, training the most accurate model was over 5.9x faster than on a 8 core CPU instance.
 <!-- 2x4 grid of date (4x) vs ((QLD,NSW, True),((VIC,SA,True)))-->
 
 ## Final note
 feature engineering, more involved models, etc.
 
 last step: change pw again -.-
+
+rare event large data specific training on events aroun spikes neg or pos, focus on these anomalies to predict better to not drown them out
+
+rebinning to larger/smaller/much larger bins, e.g. 2,4,6h bins, in order to catch different characteristics of the evolution and different parts of the signal.
+
+only reasonable though with more data, after ~1-2yrs worth will come into its full strength

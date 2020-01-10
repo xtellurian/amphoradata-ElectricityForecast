@@ -116,7 +116,7 @@ def fetch_data(params):
       # has 'Forecast' and 'Actual' values for spot prices, also get the second one if
       # the parameter is passed 
 
-      # if you dont understand wtf is going on:
+      # if you dont understand wtf is going on everything is build on top of azure Tsx:
       # https://docs.microsoft.com/en-au/rest/api/time-series-insights/dataaccess(preview)/query/execute#getseries
 
       # get the series (plural, if so defined above in value_dict!), save to time_series_data
@@ -139,8 +139,9 @@ def fetch_data(params):
         banana.columns = properties_filtered
       else:
         banana.columns = properties
-      return banana
 
+      return banana
+      
     except ApiException as e:
       print("Exception when calling API: %s\n" % e)
 
