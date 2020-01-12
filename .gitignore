@@ -1,6 +1,5 @@
 # Files
 .DS_Store
-*.png
 *.pdf
 ./notes.txt
 ._*
