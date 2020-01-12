@@ -102,6 +102,19 @@ To get started with the project, follow these steps to get set up:
 A wrapper [APIfetch.py](./1_modules/modules/APIfetch.py) for the Amphora Data API was created to help the eventual automation of the data download, forecasting and data upload.  The wrapper facilitates these three steps for users, only requiring them to state the desired dates and amphora, while taking care of everything else in the process.
 
 
+# Code and Data
+
+## Quick start the project
+
+To get started with the project, follow these steps to get set up:
+
+1. Run `git clone https://github.com/1112114641/amphoradata-ElectricityForecast.git` in kozai terminal, or download from github `https://github.com/1112114641/amphoradata-ElectricityForecast` and then manually upload to kozai
+2. Run `cd 0_setup`, then execute `export usrname='yourAmphoraUsername'`, and `export password='yourAmphoraPassword'` to set the amphora data password and username
+3. Run `conda env create -f EForecast.yml` to setup the environment, install python packages and then activate the env with `conda activate EForecast`
+ - if a `permission denied` error occurs, change rights with `chmod a+x EForecast.yml` to make the file executable, run 3., then change back to base dir with `cd ..`
+4. Take care to ensure the variables $usrname and $password are set, so connection to amphora API possible. To test this, run `echo $usrname` or `echo $password` in your shell
+5. Open the `ipynb` file in the base directory, which is now ready to be run
+
 ## Into the Data Science
 
 The project was started with some exploratory analysis of the downloaded spot prices and weather data from Amphora Data. As a proof-of-concept / baseline, a multiple linear regression model was then built to predict spot prices for electricity in South Australia (SA). These simple models often show a good performance in a wide range of situations and offer an indication of the importance of new features as they are added to the model. Then, more complex and involved models were developed and tested, measured against this baseline.
