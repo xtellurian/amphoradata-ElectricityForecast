@@ -54,11 +54,13 @@ You may also wish to be exposed because as long as you don't consume during peri
 
 Best case scenario, you need an automated and robust prediction of the price, and an automated go/no-go decision framework. [Amphora Data](https://amphoradata.com) and Koz.ai have partnered to develop this open source experimentation tool for achieving just that. We hope you find it useful :)
 
+# Who we are
+
 ## Better data, and more of it.
 
 For data science, and specifically for forecasting problems, accurate predictions require large amounts of data. Making a prediction on something not seen before by the model, will be difficult in most situations. Often, more data is not sufficient though, and other data, other variables help to improve model performance. 
 
-Amphora Data is a platform to discover, package, and trade data relevant to agriculture, either in real-time, or historical. An Amphora is an abstraction on data that allows us to generalise on it's contents. Each Amphora generally contains a small but useful dataset that's consistently updating. Amphorae provide a standard interface to describing, accessing, and monetising data so that each additional datasource is easier to include than the last.
+**Amphora Data** is a platform to discover, package, and trade data relevant to agriculture, either in real-time, or historical. An Amphora is an abstraction on data that allows us to generalise on it's contents. Each Amphora generally contains a small but useful dataset that's consistently updating. Amphorae provide a standard interface to describing, accessing, and monetising data so that each additional datasource is easier to include than the last.
 
 The screenshot below shows the Amphora web application displaying metadata from a Meat and Livestock Australia data feed. In fact, any organisation on Amphora Data can create and trade arbitrary data as they like, and the number of Amphora is growing consistently. All the data used in this project are available at [beta.amphoradata.com](https://beta.amphoradata.com)
 
@@ -69,19 +71,7 @@ Amphora Data also provide Python (as seen in this project) and Dotnet SDKs, and 
 
 Amphora Data is currently in private beta. For access visit [amphoradata.com/contact-us](https://amphoradata.com/contact-us)
 
-## Quick start the project
-
-To get started with the project, follow these steps to get set up:
-
-1. Run `git clone https://github.com/1112114641/amphoradata-ElectricityForecast.git` in kozai terminal, or download from github `https://github.com/1112114641/amphoradata-ElectricityForecast` and then manually upload to kozai
-2. Run `cd 0_setup`, then execute `export usrname='yourAmphoraUsername'`, and `export password='yourAmphoraPassword'` to set the amphora data password and username
-3. Run `conda env create -f EForecast.yml` to setup the environment, install python packages and then activate the env with `conda activate EForecast`
- - if a `permission denied` error occurs, change rights with `chmod a+x EForecast.yml` to make the file executable, run 3., then change back to base dir with `cd ..`
-4. Take care to ensure the variables $usrname and $password are set, so connection to amphora API possible. To test this, run `echo $usrname` or `echo $password` in your shell
-5. Open the `ipynb` file in the base directory, which is now ready to be run
-
-
-###  Simplify ([Koz.ai](https://koz.ai)) your life
+##  Simplify ([Koz.ai](https://koz.ai)) your life
 
 With more data and larger projects compute power will soon become to little and correspondingly waiting times will increase. [Koz.ai](https://koz.ai) offers the solution to computers running hot and fans reaching the noise level of a vacuum cleaner, allowing to easily scale your projects from single CPU, or GPU, to an entire cluster for plentiful compute power.
 More importantly, with the built-in git support, versioning is simple and keeps your projects safe and allows for easy collaboration on a project. 
@@ -95,6 +85,19 @@ For a project like the eletricity spot price predictions here, Koz.ai offers the
 <!--### Connecting e.g. VSCode to a kozai sesh
  follow e.g. [here](https://blog.ouseful.info/2019/02/11/connecting-to-a-remote-jupyter-notebook-server-running-on-digital-ocean-from-microsoft-vs-code/ "Connect VSCode to external Kernel")
 -->
+
+# Code and Data
+
+## Quick start the project
+
+To get started with the project, follow these steps to get set up:
+
+1. Run `git clone https://github.com/1112114641/amphoradata-ElectricityForecast.git` in kozai terminal, or download from github `https://github.com/1112114641/amphoradata-ElectricityForecast` and then manually upload to kozai
+2. Run `cd 0_setup`, then execute `export usrname='yourAmphoraUsername'`, and `export password='yourAmphoraPassword'` to set the amphora data password and username
+3. Run `conda env create -f EForecast.yml` to setup the environment, install python packages and then activate the env with `conda activate EForecast`
+ - if a `permission denied` error occurs, change rights with `chmod a+x EForecast.yml` to make the file executable, run 3., then change back to base dir with `cd ..`
+4. Take care to ensure the variables $usrname and $password are set, so connection to amphora API possible. To test this, run `echo $usrname` or `echo $password` in your shell
+5. Open the `ipynb` file in the base directory, which is now ready to be run
 
 ## Into the Data Science
 
