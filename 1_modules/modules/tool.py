@@ -1,6 +1,6 @@
 from sklearn.ensemble import RandomForestRegressor, ExtraTreesRegressor
 from sklearn import linear_model
-import statsmodels.api as sm
+#import statsmodels.api as sm
 import pandas as pd
 import numpy as np
 from datetime import date
@@ -237,6 +237,33 @@ def reshape_for_CNN(df):
     nrows, ncols = arr.shape # pylint: disable=unpacking-non-sequence
     
     return arr.reshape(nrows, ncols, 1)  # pylint: disable=too-many-function-args
+
+# def reshape_for_CNN_2(sequences, n_steps_in, n_steps_out):
+#     """
+#     changes df from pd.DataFrame to np.array to reshape the
+#     array into the right shape of (nrow, ncols, preds) corresponding to
+#     (batch_size, steps, input_dim) necessary for Conv1D input.
+#     """
+
+# 	X, y = list(), list()
+# 	for i in range(len(sequences)):
+# 		# find the end of this pattern
+# 		end_ix = i + n_steps_in
+# 		out_end_ix = end_ix + n_steps_out
+# 		# check if we are beyond the dataset
+# 		if out_end_ix > len(sequences):
+# 			break
+# 		# gather input and output parts of the pattern
+# 		seq_x, seq_y = sequences[i:end_ix, :], sequences[end_ix:out_end_ix, :]
+# 		X.append(seq_x)
+# 		y.append(seq_y)
+# 	return array(X), array(y)
+
+#     #48 (time)steps in 24 out 
+#     arr = np.array(df.values)
+#     nrows, ncols = arr.shape # pylint: disable=unpacking-non-sequence
+#     mba = np.floor(nrows/feed_in)
+#     return arr.reshape(nrows, ncols, 1)  # pylint: disable=too-many-function-args
     
 def step_decay(epoch,initialLR=0.1,drop=0.5,drop_per_epoch=15):
     '''
@@ -267,16 +294,29 @@ def MSE_CNN(predictions, true_values):
     
     return mse, rel
 
+def MSE_CNN_2(predictions, true_values):
+    """
+    calculates the error per returned
+
+    returns mse np.array, rel error np.array 
+    """
+    predictions = pd.DataFrame(predictions)
+    predictions.index = true_values.index
+    
+    mse = round(np.mean((predictions - true_values)**2),3)
+    rel = round(np.mean(100*np.abs((predictions-true_values)/true_values)),3)
+    
+    return mse, rel
+
 def MSE_CNN_df(predictions, true_values):
     """
     calculates the error per returned
 
     returns mse np.array, rel error np.array 
     """
-    mse = round(np.mean((predictions - true_values)**2),3)
-    rel = round(np.mean(100*np.abs((predictions-true_values)/true_values)),3)
+    mse = np.mean((predictions.reshape(len(predictions)) - np.array(true_values).reshape(len(true_values)))**2)
     
-    return mse, rel
+    return mse
 
 def MSE_NN_3(predictions, true_values):
     """
