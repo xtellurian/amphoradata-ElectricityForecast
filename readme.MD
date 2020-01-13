@@ -163,4 +163,4 @@ In time, given a larger amount of data (~1-2 years worth), feature engineering a
 
 For a larger amount of data, rare events like spot price spikes will then have to be more carefully modelled for, to ensure the models correct predictions, in order not to drown out these rare events. For this end, training can be specifically focussed on these, or artifical data can be created to "enrich the price spike data".
 
-Focussing on the more regular day-to-day price variations, rebinning from 1h intervals into larger bins, e.g. 2,4,6h bins, can bring out further characteristics in the data and make it easier for the model to pick on different characteristics of the evolution and different parts of the signal, further improving model performance.
+Focussing on the more regular day-to-day price variations, rebinning from 1h intervals into larger bins, e.g. 2, 4, 6h bins, can bring out further characteristics in the data and make it easier for the model to pick on different characteristics of the evolution and different parts of the signal, further improving model performance.
