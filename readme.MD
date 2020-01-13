@@ -138,13 +138,13 @@ As the amount of data at the start of the project was limited in terms of data s
 ### Model selection
 
 Often, the central question for data science is the choice of the model, where several competing factors have to be considered: explainability, model performance, model inference time, and model train time.
-For this specific project, where thanks to Kozai the latter two were not a concern, a variety of differnt models and architectures were tested, among them simple linear models, random forests, but also dense neural nets, and recurrent, and convolutional neural nets. For all these models,the optimisation criterion was the mean square error (mse), as large errors are undesired here, and it is easily interpretable if the root of the mse is considered, yielding an error in A$.
+For this specific project, where thanks to Kozai the latter two were not a concern, a variety of differnt models and architectures were tested, among them simple linear models, random forests, but also dense neural nets, and recurrent, and convolutional neural nets. For all these models,the optimisation criterion was the mean square error (mse), as large errors are undesired here, and it is easily interpretable if the root of the mse is considered, yielding an error in $.
 Each model was trained on features _x_, with the corresponding spot prices lagged by 1 to 12h, to be able to predict for 1 to 24 timesteps into the future.
 The reason for these 24h prediction windows is rapidly decreasing forecast quality for longer periods, and a more accurate prediction of the windows between 4-9pm, and 2-9am, where most price spikes occur.
 
-The best performing model with the current amount of data (~45days) was a convolutional neural net (CNN) optimising by SA spot prices, as indicated by the overal minimal mean mse over the 24 prediction timesteps. The close second most accurate model was a very similar model, optimising for each state concurrently.
+The best performing model with the current amount of data (~45days) was a convolutional neural net (CNN) optimising by SA spot prices, as indicated by the overal minimal mean mse over the 24 prediction timesteps. The second most accurate model with very similar performance optimised for each state concurrently.
 
-The model performance was confirmed by comparing the mean mse over the 24 predicted values for all models.
+The best model performance for final predictions was confirmed by comparing the mean mse over the 24 predicted values for all models and architectures.
 
 ## Predictions
 ![Predictions for the 17th - 23rd Dec 2019](images/Spike.png)
