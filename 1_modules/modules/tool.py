@@ -180,34 +180,6 @@ def split_dates_df(df_, _index=True, drop=True):
     
     return df_
 
-# def holiday_col_creation(df, country, *state):
-#     """
-#     Creates a new column in the pd.DataFrame, depending on the
-#     declared state and country. Assumes a DateTime index!
-#     (wraps around holidays package) 
-    
-#     df: pd.DataFrame
-#     country: (str) country of interest
-#     *state: (str) list of states holiday columns are to be created for
-#     """
-#     # AU procvinces: ACT (default), NSW, NT, QLD, SA, TAS, VIC, WA
-#     # date(2015, 1, 1) in AU_holidays
-#     # AU_holiday = holidays.CountryHoliday('AU', prov=None)
-
-#     assert isinstance(df.index, pd.core.indexes.datetimes.DatetimeIndex), 'Index does not contain DateTime objects'
-#     states = ['ACT', 'NSW', 'NT', 'QLD', 'SA', 'TAS', 'VIC', 'WA', '']
-        
-#     if country == 'AU':
-#         for _ in state:
-#             assert _ in states, '{} not in Australia.'.format(_)
-#     apple = []
-#     for _ in state:
-#         list_holiday = holidays.CountryHoliday(country, prov=_)
-#         apple = '_'.join(['holiday', _])
-#         df[apple] = df.index.isin(list_holiday)
-        
-#     return df
-
 def time_shift(df, n, col=False, fill=np.nan):
     """
     To hard code the time-like nature of a time series dataset, this
@@ -237,34 +209,7 @@ def reshape_for_CNN(df):
     nrows, ncols = arr.shape # pylint: disable=unpacking-non-sequence
     
     return arr.reshape(nrows, ncols, 1)  # pylint: disable=too-many-function-args
-
-# def reshape_for_CNN_2(sequences, n_steps_in, n_steps_out):
-#     """
-#     changes df from pd.DataFrame to np.array to reshape the
-#     array into the right shape of (nrow, ncols, preds) corresponding to
-#     (batch_size, steps, input_dim) necessary for Conv1D input.
-#     """
-
-# 	X, y = list(), list()
-# 	for i in range(len(sequences)):
-# 		# find the end of this pattern
-# 		end_ix = i + n_steps_in
-# 		out_end_ix = end_ix + n_steps_out
-# 		# check if we are beyond the dataset
-# 		if out_end_ix > len(sequences):
-# 			break
-# 		# gather input and output parts of the pattern
-# 		seq_x, seq_y = sequences[i:end_ix, :], sequences[end_ix:out_end_ix, :]
-# 		X.append(seq_x)
-# 		y.append(seq_y)
-# 	return array(X), array(y)
-
-#     #48 (time)steps in 24 out 
-#     arr = np.array(df.values)
-#     nrows, ncols = arr.shape # pylint: disable=unpacking-non-sequence
-#     mba = np.floor(nrows/feed_in)
-#     return arr.reshape(nrows, ncols, 1)  # pylint: disable=too-many-function-args
-    
+   
 def step_decay(epoch,initialLR=0.1,drop=0.5,drop_per_epoch=15):
     '''
     Sets the learning rate to gradually decay per epoch with a rate decay given by `rop`,
@@ -341,21 +286,3 @@ def banana():
     easter egg.
     '''
     return print('banana')
-    
-# def MSE_CNN2(model, data, true_values):
-#     """
-#     calculates the error per returned
-
-#     returns mse np.array, rel error np.array 
-#     """
-#     predictions = model.predict(data)
-#     temp_ = pd.DataFrame(index=len(predictions), columns=true_values.columns)
-#     predictions = [predictions[_].reshape((1,len(predictions[0]))) for _ in range(len(a))]
-#     for _ in
-#     predictions.columns = true_values.columns
-#     predictions.index = true_values.index
-    
-#     mse = round(np.mean((predictions - true_values)**2),3)
-#     rel = round(np.mean(100*np.abs((predictions-true_values)/true_values)),3)
-    
-#     return mse, rel

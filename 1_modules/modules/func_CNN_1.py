@@ -94,25 +94,3 @@ def func_CNN_1(df_, nn_name='func_CNN', single_output=False):
         model_CNN = Model(inputs = input_all, outputs=[NSW3,QLD3,VIC3,SA3], name=nn_name)
 
     return model_CNN
-
-# # learning rate Adam + saw tooth:
-# def sawtooth_decay(initial_lr, drop, epoch):
-#     '''
-#     hikes the learning rate up to drop^n * initial_lrate after every epoch/3 until n=3. For a step decay this would follow:
-    
-#   ^  |_        
-#   |    |_      __
-#   L      |_    | |_     __
-#   R        |_  |   |_  | |_
-#              |_|     |_|   |_
-#     epochs ->
-    
-#     '''
-
-# 	epochs_drop = epoch//4
-#   if epo
-# 	lrate = initial_lrate * math.pow(drop, math.floor((1+epoch)/epochs_drop))
-# 	return lrate
-
-# lrate = LearningRateScheduler(sawtooth_decay)
-# callbacks_list = [lrate]
