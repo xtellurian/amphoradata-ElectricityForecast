@@ -14,7 +14,7 @@ Accurate predictions, especially in forecasting problems, require large amounts 
 The screenshot below shows the Amphora web application displaying metadata from a Meat and Livestock Australia data feed. In fact, any organisation on Amphora Data can create and trade arbitrary data as they like, and the number of Amphorae is growing consistently. All the data used in this project are available at [beta.amphoradata.com](https://beta.amphoradata.com)
 
 ![Labelled screenshot of Amphora Data web application](images/screenshot-amphoraBreakdown.png)
-**Figure 5:** Screenshot of the Amphora Data web app.
+**Figure 1:** Screenshot of the Amphora Data web app.
 
 Amphora Data also provides Python (as used in this project), and Dotnet SDKs, and an API specification, so you can integrate data into your own applications or data science tools and processes.
 
@@ -29,7 +29,7 @@ Thus, Kozai makes moving between different work locations easy, removes issues w
 Kozai offers the perfect platform for projects like the one described here, while also being reasonably priced and even offering a pay-as-you-go model.
 
 ![Screenshot of current state of Kozai UI](images/KozaiUI.png)
-**Figure 6:** The Kozai UI, with labels showing some key intrinsic features.
+**Figure 2:** The Kozai UI, with labels showing some key intrinsic features.
 
 Kozai is currently in the private beta phase, going into public beta in Q2 2020. To register to the mailing list for information and updates visit [https://koz.ai](https://koz.ai)
 
@@ -45,7 +45,7 @@ The Australian National Electricity Market (NEM) is a wholesale electricity mark
 All electricity sales are traded through the NEM. It is a wholesale market and prices fluctuate in response to supply and demand at any point in time. The NEM is split into 5 regions (QLD, NSW, VIC, TAS, SA), and prices are set per-region.
 
 ![Map of the NEM regions](images/map-NEM.png)
-**Figure 1:** Map of the NEM regions: South Australia (grey), Victoria (green), Tasmania (red), New South Wales (blue), and Queensland (yellow).
+**Figure 3:** Map of the NEM regions: South Australia (grey), Victoria (green), Tasmania (red), New South Wales (blue), and Queensland (yellow).
 
 ### What do the prices look like?
 
@@ -54,18 +54,18 @@ All electricity sales are traded through the NEM. It is a wholesale market and p
 Electricity prices are set every 5 minutes (the ‘dispatch price’) and 6 dispatch prices are averaged every half hour to generate the ‘spot price’. Below are the prices for an arbitrary week in South Australia. We observe that the price remains relatively close to $50, although occasionally dropping sharply and [becoming negative](https://www.afr.com/companies/energy/why-electricity-spot-prices-are-hitting-zero-20190723-p52a08). At these times, consumers of electricity are actually paid to consume.
 
 ![Plot of normal electricity price and scheduled generation in a week](images/plot-normalElectricityPriceAndGen-SA.png)
-**Figure 2:** Normal electricity price and scheduled generation in a week for SA.
+**Figure 4:** Normal electricity price and scheduled generation in a week for SA.
 
 Now compare the 'normal' week above, to the week that immediately followed it in December of 2019. Clearly things are very different. The 'normal' variability ~$50 is no longer visible, as the graph is dominated by a huge spike on December 19, when the price jumped to over $8,000, approximately two orders of magnitude larger than the maximum for the days either side. We also observe that the maximum scheduled generation has doubled compared with the previous week. 
 ![Plot of abnormal electricity price and scheduled generation in a week](images/plot-spikeElectricityPriceAndGen-SA.png)
-**Figure 3:** Abnormal electricity price and scheduled generation in a week for SA.
+**Figure 5:** Abnormal electricity price and scheduled generation in a week for SA.
 
 So what's going on? A major driver of electricity demand (and therefore supply) is the weather. The plot of temperature below shows that Adelaide was experiencing a serious heatwave from December 17 to December 20, with the price spike occurring the evening before the hottest and last day. Keen observers will also note that the minimum overnight temperature was high at 28 degrees.
 
 We've highlighted the same period for each day of the heatwave (7 - 9 pm), which coincides with the price spike on the last day. Temperatures are significant, because higher temperatures mean more air-conditioning (i.e. greater consumption) and often less efficient power plants. Wind speed is also significant because of the high use of wind energy in South Australia.
 
 ![Plot of temperature and wind speed during abnormal week](images/plot-weatherAroundSpike-Adelaide.png)
-**Figure 4:** Temperature and wind speed during abnormal week for SA.
+**Figure 6:** Temperature and wind speed during abnormal week for SA.
 
 ### Counting the cost
 
