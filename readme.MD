@@ -31,7 +31,7 @@ Kozai offers the perfect platform for projects like the one described here, whil
 ![Screenshot of current state of Kozai UI](images/KozaiUI.png)
 **Figure 2:** The Kozai UI, with labels showing some key intrinsic features.
 
-Kozai is currently in the private beta phase, going into public beta in Q2 2020. To register to the mailing list for information and updates visit [https://koz.ai](https://koz.ai)
+Kozai is currently in the private beta phase, going into public beta in Q2 2020. To register to the mailing list for information and updates visit [https://koz.ai](https://koz.ai).
 
 ## Electricity Spot Prices in South Australia
 
@@ -103,7 +103,7 @@ A wrapper [APIfetch.py](./1_modules/modules/APIfetch.py) for the Amphora Data AP
 
 ## Into the Data Science
 
-The project was started with some exploratory analysis of the downloaded spot prices and weather data from Amphora Data. As a proof-of-concept baseline, a multiple linear regression model was then built to predict spot prices for electricity in South Australia (SA). These simple models often show a good performance in a wide range of situations and offer an indication of the importance of new features as they are added to the model. Then, more complex and involved models were developed and tested, measured against this baseline.
+The project was started with some exploratory analysis of the downloaded spot prices and weather data from Amphora Data. As a proof-of-concept / baseline, a multiple linear regression model was then built to predict spot prices for electricity in South Australia (SA). These simple models often show a good performance in a wide range of situations and offer an indication of the importance of new features as they are added to the model. Then, more complex and involved models were developed and tested, measured against this baseline.
 
 ### Exploratory Data Analysis (EDA)
 
@@ -131,15 +131,16 @@ Similarly, the prices in NSW and QLD follow a similar pattern of mutual dependen
 
 Adjusting the linear model to contain only these top nine features already improved the performance, showing a about 30% lower mean square error (mse):
 ```
->>>print('RMSE with correlation features:', rmse_corr, '$/MWh\n', end = ''); print('RMSE w/o correlation features: ', rmse_plain, '$/MWh')
+>>>print('RMSE with correlation features:', rmse_corr, '$/MWh\n')
 RMSE with correlation features: 207.58 $/MWh
+>>>print('RMSE w/o correlation features: ', rmse_plain, '$/MWh')
 RMSE w/o correlation features:  281.23 $/MWh
 ```
 For both the random forest regressor, as well as the deep learning models tested for model selection, a similar improvement in performance manifested using only these highly correlated features, or a similar selection of a subset of features.
 
 #### Distribution of data
 
-Especially for classical machine learning methods, the distribution of data matters, where normal distributed data leads to faster algorithm convergence and better predictions. In this case, fortunately, most data was fairly close to either a shifted normal, or log-normal distribution as can be seen in a pairplot. Correspondingly, no data transformation was undertaken, although it is a possible improvement factor to consider for future modelling efforts.
+Especially for classical machine learning methods the distribution of data matters, where normal distributed data leads to faster algorithm convergence and better predictions. In this case, fortunately, most data was fairly close to either a shifted normal, or log-normal distribution as can be seen in a pairplot. Correspondingly, no data transformation was undertaken, although it is a possible improvement factor to consider for future modelling efforts.
 
 ### Feature engineering
 
@@ -156,9 +157,12 @@ The best performing model with the current amount of data (~45days) was a convol
 
 ```
 >>>print(mse)
-   | Lin|RFR | RNN | CNN_2 | CNN_4 | NN_3 |
--- | :----- : | :-----: | :-----: | :-----: | :----: | :-----: |
- mse | 43091 | 78459 | 13388 | 12937 | 4791 | 59212 |
+Lin: 	43091
+RFR:	78459
+RNN: 	13388
+CNN_2:  12937
+CNN_4: 4791
+NN_3: 	59212
 ```
 
 ## Predictions
@@ -178,5 +182,4 @@ In time, given a larger amount of data (~1-2 years worth), feature engineering a
 For a larger amount of data, rare events like spot price spikes will then have to be more carefully modelled for, to ensure the models correct predictions, in order not to drown out these rare events. For this end, training can be specifically focussed on these, or artificial data can be created to "enrich the price spike data".
 
 Focussing on the more regular day-to-day price variations, rebinning from 1h intervals into larger bins, e.g. 2, 4, 6h bins, can bring out further characteristics in the data and make it easier for the model to pick on different characteristics of the evolution and different parts of the signal, further improving model performance.
-
 
