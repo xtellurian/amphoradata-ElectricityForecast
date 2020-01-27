@@ -247,11 +247,24 @@ def MSE_CNN_2(predictions, true_values):
     """
     predictions = pd.DataFrame(predictions)
     predictions.index = true_values.index
+    predictions.columns = true_values.columns
     
     mse = round(np.mean((predictions - true_values)**2),3)
     rel = round(np.mean(100*np.abs((predictions-true_values)/true_values)),3)
     
     return mse, rel
+
+def MSE_RNN(predictions, true_values):
+    """
+    calculates the error per returned
+
+    returns mse np.array, rel error np.array 
+    """
+    predictions = np.array(predictions)
+    true_values = np.array(true_values)
+    mse = round(np.mean((predictions - true_values)**2),3)
+    
+    return mse
 
 def MSE_CNN_df(predictions, true_values):
     """

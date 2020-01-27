@@ -1,5 +1,5 @@
 # Predicting Electricity Spot Prices using [Amphora Data](https://amphoradata.com) and [Kozai](https://koz.ai)
- > To skip the initial explanations, and dive into the project follow the [quick start manual](#quick-start-the-project).
+ > To skip the initial explanations and project descriptions and dive straight into the project follow the [quick start manual](#quick-start-the-project).
 
 In South Australia, electricity is predominantly sourced from renewable energy sources such as sun and wind. As both wind speeds and sun insolation vary greatly, so do electricity prices. In an effort to model the electricity spot price spikes in South Australia, data from the [Amphora Data](https://amphoradata.com) agricultural data repository was ingested into the [Kozai](https://koz.ai) data science platform for modelling and predictions, resulting in a good predictor for price spikes based on a convolutional neural net.
 
@@ -101,13 +101,14 @@ To get started with the project, follow these steps to get set up:
 
 A wrapper [APIfetch.py](./1_modules/modules/APIfetch.py) for the Amphora Data API was created to help the eventual automation of the data download, forecasting and data upload.  The wrapper facilitates these three steps for users, only requiring them to state the desired dates and amphora, while taking care of everything else in the process.
 
+
 ## Into the Data Science
 
 The project was started with some exploratory analysis of the downloaded spot prices and weather data from Amphora Data. As a proof-of-concept / baseline, a multiple linear regression model was then built to predict spot prices for electricity in South Australia (SA). These simple models often show a good performance in a wide range of situations and offer an indication of the importance of new features as they are added to the model. Then, more complex and involved models were developed and tested, measured against this baseline.
 
 ### Exploratory Data Analysis (EDA)
 
-As a start, as in most of my projects, data was checked for completeness, and missing values were interpolated with splines. To capture the temporal nature of the data, new features were created consisting of the discrete t<sub>n</sub>-t<sub>n-1</sub> time differences. 
+As a start, as in most of my projects, data was checked for completeness, and if there had been any missing values, they would have been interpolated with splines. To capture the temporal nature of the data, new features were created consisting of the discrete t<sub>n</sub>-t<sub>n-1</sub> time differences. 
 
 The correlations between the SA spot prices and all other variables were tested, yielding the result that the SA spot prices behave the most similar to the `scheduledGeneration` in Victoria (VIC) and SA. The next most correlated features were weather-related, namely those that influence solar cell and/or wind farm performance.
 
@@ -148,22 +149,28 @@ The amount of data at the start of the project was limited in terms of typical f
 
 ### Model selection
 
+The central aim for model selection was (1) prediction of spikes in spot prices for SA, and (2) describing _all_ SA spot prices as accurately as possible. Given the goal of this project, (1) took precedence over (2).
+
 Often, the central question for data science is the choice of the model, where several competing factors have to be considered: explainability, model performance, model inference time, and model train time.
-The latter two factors were not a concern for this specific project thanks to Kozai! Hence a variety of different models and architectures were tested, among them simple linear models (Lin), random forests (RFR), but also dense (NN_3), recurrent (RNN) and convolutional neural networks (CNN_2 and CNN_4). For all these models, the optimisation criterion was the mean square error (mse). This criterion was chosen as large outliers are undesirable and the mse is easily interpretable, if its square root is considered, as an error in units of $/MWh.
-Each model was trained on features _x_, with the corresponding spot prices _y_ lagged by 1 to 24h, to be able to predict 1 to 24 timesteps into the future.
-The reason for these 24h prediction windows is rapidly decreasing forecast quality for longer periods, and a more accurate prediction of the windows between 4-9pm, and 2-9am, where most price spikes occur.
+The latter two factors were not a concern for this specific project thanks to Kozai! Hence a variety of different models and architectures were tested, among them simple linear models (Lin), random forests (RFR), but also dense (NN_3), recurrent (RNN) and convolutional neural networks (CNN_2 and CNN_4). The linear model and RFR were chosen, as they often show good performance, especially so on small datasets, and allow for easy explainability of the models outputs. The deep learning models were chosen, because they either have are explicitly geared towards this kind of problem, like the recurrent neural net and the [causally padded](http://arxiv.org/abs/1609.03499) convolutional neural net, or have well-performing historic use cases for similar problems.
 
-The best performing model with the current amount of data (~45days) was a convolutional neural net (CNN_4) optimising by SA spot prices, as indicated by the overall minimal mse over the 24 prediction timesteps. This model yielded a standard error of 69 $/MWh for the SA spot price predictions. The second most accurate model with very similar performance optimised for each state concurrently (CNN_2).
-
+For all these models, the optimisation criterion was the mean square error (mse). This criterion was chosen as large outliers are undesirable and the mse is easily interpretable, if its square root is considered, as an error in units of $/MWh.
+Each model was trained on features _x_, with the corresponding spot prices _y_ lagged by 1 to 24h, to be able to predict 1 to 24 timesteps into the future, with the results, listed below:
 ```
 >>>print(mse)
-Lin: 	43091
+Lin: 	43090
 RFR:	78459
-RNN: 	13388
-CNN_2:  12937
-CNN_4: 4791
-NN_3: 	59212
+RNN: 	17158
+CNN_2:  6350
+CNN_4:  5832
+NN_3: 	369214
 ```
+
+The reason for these 24h prediction windows is rapidly decreasing forecast quality for longer periods, and a more accurate prediction of the windows between 4-9pm, and 2-9am, where most price spikes occur. With shorter prediction windows model acccuracy, in general, improves but the usefullness of the model decreases.
+
+The best performing model with the current amount of data (~45days) was a convolutional neural net (CNN_4) optimising by SA spot prices, as indicated by the overall minimal mse over the 24 prediction timesteps. This model yielded a standard error of 76 $/MWh for the SA spot price predictions. The second most accurate model with very similar performance optimised for each state concurrently (CNN_2) with a standard error of 89 $/MWh.
+
+
 
 ## Predictions
 ![Predictions for the 17th - 23rd Dec 2019](images/Spike.png)
@@ -179,7 +186,8 @@ On a Kozai single GPU instance, training the most accurate model was over 5.9x f
 
 In time, given a larger amount of data (~1-2 years worth), feature engineering and more fine tuned models are likely to improve predictions from spot price spike prediction to levels, where the actual price at any point in time can be predicted more accurately.
 
-For a larger amount of data, rare events like spot price spikes will then have to be more carefully modelled for, to ensure the models correct predictions, in order not to drown out these rare events. For this end, training can be specifically focussed on these, or artificial data can be created to "enrich the price spike data".
-
 Focussing on the more regular day-to-day price variations, rebinning from 1h intervals into larger bins, e.g. 2, 4, 6h bins, can bring out further characteristics in the data and make it easier for the model to pick on different characteristics of the evolution and different parts of the signal, further improving model performance.
+
+For a larger amount of data, rare events like spot price spikes will then have to be more carefully modelled for, to ensure the models correct predictions, in order not to drown out these rare events. For this end, training can be specifically focussed on these, or artificial data can be created to "enrich the price spike data".
+In combination with both a larger dataset, and enriched data, other neural net architecture that have recently shown great performance in related tasks, like [transformers](https://ai.googleblog.com/2018/11/open-sourcing-bert-state-of-art-pre.html), could become an interesting option.
 
