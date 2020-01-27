@@ -154,6 +154,11 @@ The central aim for model selection was (1) prediction of spikes in spot prices 
 Often, the central question for data science is the choice of the model, where several competing factors have to be considered: explainability, model performance, model inference time, and model train time.
 The latter two factors were not a concern for this specific project thanks to Kozai! Hence a variety of different models and architectures were tested, among them simple linear models (Lin), random forests (RFR), but also dense (NN_3), recurrent (RNN) and convolutional neural networks (CNN_2 and CNN_4). The linear model and RFR were chosen, as they often show good performance, especially so on small datasets, and allow for easy explainability of the models outputs. The deep learning models were chosen, because they either have are explicitly geared towards this kind of problem, like the recurrent neural net and the [causally padded](http://arxiv.org/abs/1609.03499) convolutional neural net, or have well-performing historic use cases for similar problems.
 
+#### Model training optimisation
+
+To accelerate model training and obtain better results for the deep learning models, the [Adam](https://arxiv.org/abs/1412.6980) optimiser learning rate was fine tuned, by training the model for one epoch, and stepping through a [nested intervall](https://en.wikipedia.org/wiki/Nested_intervals) optimisation, to find the optimal learning rate. For all, except the RNN, the best learning rate was a factor two larger than the standard setting of `1E-3`, leading to slightly faster convergences.
+
+#### Model error
 For all these models, the optimisation criterion was the mean square error (mse). This criterion was chosen as large outliers are undesirable and the mse is easily interpretable, if its square root is considered, as an error in units of $/MWh.
 Each model was trained on features _x_, with the corresponding spot prices _y_ lagged by 1 to 24h, to be able to predict 1 to 24 timesteps into the future, with the results, listed below:
 ```
@@ -168,7 +173,7 @@ NN_3: 	369214
 
 The reason for these 24h prediction windows is rapidly decreasing forecast quality for longer periods, and a more accurate prediction of the windows between 4-9pm, and 2-9am, where most price spikes occur. With shorter prediction windows model acccuracy, in general, improves but the usefullness of the model decreases.
 
-The best performing model with the current amount of data (~45days) was a convolutional neural net (CNN_4) optimising by SA spot prices, as indicated by the overall minimal mse over the 24 prediction timesteps. This model yielded a standard error of 76 $/MWh for the SA spot price predictions. The second most accurate model with very similar performance optimised for each state concurrently (CNN_2) with a standard error of 89 $/MWh.
+The best performing model with the current amount of data (~45days) was a convolutional neural net (CNN_4) optimising by SA spot prices, as indicated by the overall minimal mse over the 24 prediction timesteps. This model yielded a standard error of 76 $/MWh for the SA spot price predictions. The second most accurate model with very similar performance optimised for each state concurrently (CNN_2) with a standard error of 79 $/MWh.
 
 
 

@@ -9,7 +9,7 @@ dependencies:
   - matplotlib
   - seaborn
   - dask
-  - tensorflow
+  - tensorflow-gpu=1.15
   - keras
   - scikit-learn
   - requests
