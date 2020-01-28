@@ -1,5 +1,5 @@
 # Predicting Electricity Spot Prices using [Amphora Data](https://amphoradata.com) and [Kozai](https://koz.ai)
- > To skip the initial explanations and project descriptions and dive straight into the project follow the [quick start manual](#quick-start-the-project).
+ > To skip the initial explanations and project descriptions and dive straight into the project follow the [quick start manual](#quick-start).
 
 In South Australia, electricity is predominantly sourced from renewable energy sources such as sun and wind. As both wind speeds and sun insolation vary greatly, so do electricity prices. In an effort to model the electricity spot price spikes in South Australia, data from the [Amphora Data](https://amphoradata.com) agricultural data repository was ingested into the [Kozai](https://koz.ai) data science platform for modelling and predictions, resulting in a good predictor for price spikes based on a convolutional neural net.
 
